@@ -1,9 +1,6 @@
 <?php
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
-namespace Payfort\Fort\Helper;
+
+namespace WebPlanex\Fort\Helper;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Api\OrderManagementInterface;
 /**
@@ -90,12 +87,13 @@ class Data extends \Magento\Payment\Helper\Data
     public function getMainConfigData($config_field)
     {
         return $this->scopeConfig->getValue(
-            ('payment/payfort_fort/'.$config_field),
+            ('payment/webplanex_fort/'.$config_field),
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
 
     public function getPaymentPageRedirectData($order) {
+        echo '<pre>'; print_r($order); exit;
         $paymentMethod = $order->getPayment()->getMethod();
         $orderId = $order->getRealOrderId();
         $currency = $order->getOrderCurrency()->getCurrencyCode();
@@ -110,12 +108,12 @@ class Data extends \Magento\Payment\Helper\Data
             'customer_email'      => trim( $order->getCustomerEmail() ),
             'command'             => $this->getMainConfigData('command'),
             'language'            => $language,
-            'return_url'          => $this->getReturnUrl('payfortfort/payment/response')
+            'return_url'          => $this->getReturnUrl('payforfort/payment/response')
         );
-        if($paymentMethod == \Payfort\Fort\Model\Method\Sadad::CODE) {
+        if($paymentMethod == \WebPlanex\Fort\Model\Method\Sadad::CODE) {
             $gatewayParams['payment_option'] = 'SADAD';
         }
-        elseif ($paymentMethod == \Payfort\Fort\Model\Method\Naps::CODE)
+        elseif ($paymentMethod == \WebPlanex\Fort\Model\Method\Naps::CODE)
         {
             $gatewayParams['payment_option']    = 'NAPS';
             $gatewayParams['order_description'] = $orderId;
@@ -163,7 +161,7 @@ class Data extends \Magento\Payment\Helper\Data
 
     public function isMerchantPageMethod($order) {
         $paymentMethod = $order->getPayment()->getMethod();
-        if($paymentMethod == \Payfort\Fort\Model\Method\Cc::CODE && $this->getConfig('payment/payfort_fort_cc/integration_type') == \Payfort\Fort\Model\Config\Source\Integrationtypeoptions::MERCHANT_PAGE) {
+        if($paymentMethod == \WebPlanex\Fort\Model\Method\Cc::CODE && $this->getConfig('payment/webplanex_fort_cc/integration_type') == \WebPlanex\Fort\Model\Config\Source\Integrationtypeoptions::MERCHANT_PAGE) {
             return true;
         }
         return false;
@@ -345,7 +343,7 @@ class Data extends \Magento\Payment\Helper\Data
 
     public function getLanguage() {
         $language = $this->getMainConfigData('language');
-        if ($language == \Payfort\Fort\Model\Config\Source\Languageoptions::STORE) {
+        if ($language == \WebPlanex\Fort\Model\Config\Source\Languageoptions::STORE) {
             $language = $this->_localeResolver->getLocale();
         }
         if(substr($language, 0, 2) == 'ar') {
@@ -377,7 +375,7 @@ class Data extends \Magento\Payment\Helper\Data
     {
         $order = $this->session->getLastRealOrder();
         if(!empty($comment)) {
-            $comment = 'Payfort_Fort :: ' . $comment;
+            $comment = 'WebPlanex_Fort :: ' . $comment;
         }
         if ($order->getId() && $order->getState() != Order::STATE_CANCELED) {
             $order->registerCancellation($comment)->save();
@@ -395,7 +393,7 @@ class Data extends \Magento\Payment\Helper\Data
     {
         $gotoSection = false;
         if(!empty($comment)) {
-            $comment = 'Payfort_Fort :: ' . $comment;
+            $comment = 'WebPlanex_Fort :: ' . $comment;
         }
         if ($order->getState() != Order::STATE_CANCELED) {
             $order->registerCancellation($comment)->save();
@@ -414,7 +412,7 @@ class Data extends \Magento\Payment\Helper\Data
             $order->setState($this->getMainConfigData('order_status_on_fail'));
             $order->save();
             $customerNotified = $this->sendOrderEmail($order);
-            $order->addStatusToHistory( $this->getMainConfigData('order_status_on_fail') , 'Payfort_Fort :: payment has failed.', $customerNotified );
+            $order->addStatusToHistory( $this->getMainConfigData('order_status_on_fail') , 'WebPlanex_Fort :: payment has failed.', $customerNotified );
             $order->save();
             return true;
         }
@@ -429,7 +427,7 @@ class Data extends \Magento\Payment\Helper\Data
             //$order->setExtOrderId($orderNumber);
             $order->save();
             $customerNotified = $this->sendOrderEmail($order);
-            $order->addStatusToHistory( $order::STATE_PROCESSING , 'Payfort_Fort :: Order has been paid.', $customerNotified );
+            $order->addStatusToHistory( $order::STATE_PROCESSING , 'WebPlanex_Fort :: Order has been paid.', $customerNotified );
             $order->save();
             return true;
         }
@@ -466,7 +464,7 @@ class Data extends \Magento\Payment\Helper\Data
         $this->log($debugMsg);
         if(empty($responseData)) {
             $this->log('Invalid Response Parameters');
-            return \Payfort\Fort\Model\Payment::PAYMENT_STATUS_FAILED;
+            return \WebPlanex\Fort\Model\Payment::PAYMENT_STATUS_FAILED;
         }
 
         $responseSignature = $responseData['signature'];
@@ -475,25 +473,25 @@ class Data extends \Magento\Payment\Helper\Data
         $calculatedSignature = $this->calculateSignature($responseGatewayParams, 'response');
         if($responseSignature != $calculatedSignature) {
             $this->log(sprintf('Invalid Signature. Calculated Signature: %1s, Response Signature: %2s', $responseSignature, $calculatedSignature));
-            return \Payfort\Fort\Model\Payment::PAYMENT_STATUS_FAILED;
+            return \WebPlanex\Fort\Model\Payment::PAYMENT_STATUS_FAILED;
         }
         $response_code = $responseData['response_code'];
         $response_msg  = $responseData['response_message'];
         if (substr($response_code, 2) != '000') {
-            if($response_code == \Payfort\Fort\Model\Payment::PAYMENT_STATUS_CANCELED) {
+            if($response_code == \WebPlanex\Fort\Model\Payment::PAYMENT_STATUS_CANCELED) {
                 $this->log(sprintf('User has cancle the payment, Response Code (%1s), Response Message (%2s)', $response_code, $response_msg));
-                return \Payfort\Fort\Model\Payment::PAYMENT_STATUS_CANCELED;
+                return \WebPlanex\Fort\Model\Payment::PAYMENT_STATUS_CANCELED;
             }
-            elseif($response_code == \Payfort\Fort\Model\Payment::PAYMENT_STATUS_3DS_CHECK) {
-                return \Payfort\Fort\Model\Payment::PAYMENT_STATUS_3DS_CHECK;
+            elseif($response_code == \WebPlanex\Fort\Model\Payment::PAYMENT_STATUS_3DS_CHECK) {
+                return \WebPlanex\Fort\Model\Payment::PAYMENT_STATUS_3DS_CHECK;
             }
             else {
                 $this->log(sprintf('Gateway error: Response Code (%1s), Response Message (%2s)', $response_code, $response_msg));
-                return \Payfort\Fort\Model\Payment::PAYMENT_STATUS_FAILED;
+                return \WebPlanex\Fort\Model\Payment::PAYMENT_STATUS_FAILED;
             }
 
         }
-        return \Payfort\Fort\Model\Payment::PAYMENT_STATUS_SUCCESS;
+        return \WebPlanex\Fort\Model\Payment::PAYMENT_STATUS_SUCCESS;
     }
 
     /**
@@ -504,7 +502,7 @@ class Data extends \Magento\Payment\Helper\Data
         if(!$debugMode && !$forceLog) {
             return;
         }
-        $debugMsg = "=============== Payfort_Fort Module =============== \n".$messages."\n";
+        $debugMsg = "=============== WebPlanex_Fort Module =============== \n".$messages."\n";
         $this->_logger->debug($debugMsg);
     }
 }
