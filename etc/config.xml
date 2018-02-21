@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <webplanex_fort>
+                <model>WebPlanex\Fort\Model\Payment</model>
+                <!--<title>Credit / Debit Card</title>
+                <active>0</active>
+                <order_status>pending</order_status>-->
+                <sha_type>SHA-128</sha_type>
+                <language>store</language>
+                <payment_action>sale</payment_action>
+                <allowspecific>0</allowspecific>
+                <min_order_total>0</min_order_total>
+                <order_status>webplanex_fort_new</order_status>
+                <order_status_on_fail>webplanex_fort_failed</order_status_on_fail>
+                <group>webplanex_fort</group>
+            </webplanex_fort>
+            <webplanex_fort_cc>
+                <model>WebPlanex\Fort\Model\Method\Cc</model>
+                <active>0</active>
+                <title>Credit / Debit Card</title>
+                <integration_type>redirection</integration_type>
+                <order_status>webplanex_fort_new</order_status>
+                <group>webplanex_fort</group>
+                <!--<instructions>You will be redirected to the Payfort website when you place an order.</instructions>-->
+            </webplanex_fort_cc>
+            
+        </payment>
+    </default>
+</config>
