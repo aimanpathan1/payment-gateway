@@ -1,5 +1,5 @@
 <?php
-namespace WebPlanex\Fort\Observer;
+namespace Payfort\Fort\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 

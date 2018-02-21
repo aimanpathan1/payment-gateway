@@ -2,7 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <css src="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" src_type="url"/>
-        <css src="WebPlanex_Fort::css/merchant-page.css"/>
+        <css src="Payfort_Fort::css/merchant-page.css"/>
     </head>
     <body>
         <referenceBlock name="minicart" remove="true"/>
@@ -13,7 +13,7 @@
         <referenceContainer name="footer-container" remove="true"/>
 
         <referenceContainer name="content">
-            <block class="WebPlanex\Fort\Block\Payment\Redirect" template="WebPlanex_Fort::redirect.phtml" cacheable="false" />
+            <block class="Payfort\Fort\Block\Payment\Redirect" template="Payfort_Fort::redirect.phtml" cacheable="false" />
         </referenceContainer>
     </body>
 </page>

@@ -1,13 +1,13 @@
 <?php
 
-namespace WebPlanex\Fort\Block\Adminhtml\System\Config\Field;
+namespace Payfort\Fort\Block\Adminhtml\System\Config\Field;
 
 class hostToHostUrl extends \Magento\Config\Block\System\Config\Form\Field
 {
     /**
      * Helper
      *
-     * @var \WebPlanex\Fort\Helper\Data
+     * @var \Payfort\Fort\Helper\Data
      */
     protected $_helper;
 
@@ -22,12 +22,12 @@ class hostToHostUrl extends \Magento\Config\Block\System\Config\Form\Field
 
     /**
      * @param \Magento\Backend\Block\Template\Context $context
-     * @param \WebPlanex\Fort\Helper\Data $helper
+     * @param \Payfort\Fort\Helper\Data $helper
      * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
-        \WebPlanex\Fort\Helper\Data $helper,
+        \Payfort\Fort\Helper\Data $helper,
         array $data = []
     )
     {
@@ -48,6 +48,6 @@ class hostToHostUrl extends \Magento\Config\Block\System\Config\Form\Field
     }
     
     public function getHostUrl() {
-        return $this->_helper->getReturnUrl('payforfort/payment/response');
+        return $this->_helper->getReturnUrl('payfortfort/payment/response');
     }
 }

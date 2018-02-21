@@ -1,12 +1,21 @@
 <?php
+/**
+ * Payment Command Types Source Model
+ *
+ * @category    Payfort
+ * @package     Payfort_Fort
+ * @author      Deya Zalloum (dzalloum@payfort.com)
+ * @copyright   Payfort (http://www.payfort.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
 
-namespace WebPlanex\Fort\Model\Method;
-//use WebPlanex\Fort\Helper\Data;
+namespace Payfort\Fort\Model\Method;
+//use Payfort\Fort\Helper\Data;
 use \Magento\Core\Model\ObjectManager;
 
-class Cc extends \WebPlanex\Fort\Model\Payment
+class Cc extends \Payfort\Fort\Model\Payment
 {
-    const CODE = 'webplanex_fort_cc';
+    const CODE = 'payfort_fort_cc';
 
     protected $_code = self::CODE;
 
@@ -15,7 +24,7 @@ class Cc extends \WebPlanex\Fort\Model\Payment
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Api\ExtensionAttributesFactory $extensionFactory,
         \Magento\Framework\Api\AttributeValueFactory $customAttributeFactory,
-        \WebPlanex\Fort\Helper\Data $paymentData,
+        \Payfort\Fort\Helper\Data $paymentData,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Payment\Model\Method\Logger $logger,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
@@ -43,7 +52,7 @@ class Cc extends \WebPlanex\Fort\Model\Payment
      */
     public function isMerchantPage()
     {
-        if ($this->getConfigData('integration_type') == \WebPlanex\Fort\Model\Config\Source\Integrationtypeoptions::MERCHANT_PAGE) {
+        if ($this->getConfigData('integration_type') == \Payfort\Fort\Model\Config\Source\Integrationtypeoptions::MERCHANT_PAGE) {
             return true;
         }
         return false;

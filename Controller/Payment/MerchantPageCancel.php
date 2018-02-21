@@ -1,11 +1,8 @@
 <?php
 
+namespace Payfort\Fort\Controller\Payment;
 
-
-
-namespace WebPlanex\Fort\Controller\Payment;
-
-class MerchantPageCancel extends \WebPlanex\Fort\Controller\Checkout
+class MerchantPageCancel extends \Payfort\Fort\Controller\Checkout
 {
     public function execute()
     {

@@ -1,7 +1,7 @@
 <?php
     // @codingStandardsIgnoreFile
 
-    /** @var \WebPlanex\Fort\Block\Payment\Redirect $block */
+    /** @var \Payfort\Fort\Block\Payment\Redirect $block */
 
     $form_data = $block->getFormData();
     $form_url = $block->getFormUrl();
@@ -23,7 +23,7 @@
         ?>
         <p><?php echo __( 'Processing order #%1... Please wait.', $block->escapeHtml( $block->getOrderId() ) ) ?></p>
         
-        <img src="<?php echo $block->getViewFileUrl( 'WebPlanex_Fort::images/ajax-loader.gif' );?>" /><br/>
+        <img src="<?php echo $block->getViewFileUrl( 'Payfort_Fort::images/ajax-loader.gif' );?>" /><br/>
         <?php echo __( 'Redirecting...' );?>
         <form id="frm_payfort_fort_redirect" action="<?php echo $form_url?>" method="POST" style="display: none">
         <?php

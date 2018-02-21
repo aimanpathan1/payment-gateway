@@ -1,6 +1,6 @@
 {
-  "name": "PayFort Payment Module by WebPlanex",
-  "description": "PayFort module to have access to PayFort payment methods.",
+  "name": "PayFort Fort Payment Module",
+  "description": "Use PayFort Fort module to have access to Fort payment methods.",
   "type": "magento2-module",
   "version": "2.0.0",
   "license": [
@@ -18,12 +18,12 @@
     "map": [
       [
         "*",
-        "WebPlanex/Fort"
+        "Payfort/Fort"
       ]
     ]
   },
   "autoload": {
-    "psr-4": { "WebPlanex\\Fort\\": "" },
+    "psr-4": { "Payfort\\Fort\\": "" },
     "files": [ "registration.php" ]
   }
 }

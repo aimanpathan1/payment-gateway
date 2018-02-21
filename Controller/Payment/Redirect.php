@@ -1,6 +1,6 @@
 <?php
 
-namespace WebPlanex\Fort\Controller\Payment;
+namespace Payfort\Fort\Controller\Payment;
 
 class Redirect extends \Magento\Framework\App\Action\Action
 {
@@ -11,7 +11,6 @@ class Redirect extends \Magento\Framework\App\Action\Action
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
-        
         $this->resultPageFactory = $resultPageFactory;
         parent::__construct($context);
     }

@@ -1,7 +1,7 @@
 var config = {
     map: {
         '*': {
-            "merchantPage": 'WebPlanex_Fort/js/MerchantPage'
+            "merchantPage": 'Payfort_Fort/js/MerchantPage'
         }
     },
     shim: {

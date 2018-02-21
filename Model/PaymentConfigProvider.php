@@ -1,6 +1,6 @@
 <?php
 
-namespace WebPlanex\Fort\Model;
+namespace Payfort\Fort\Model;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
 use Magento\Framework\Locale\ResolverInterface;
@@ -13,8 +13,9 @@ class PaymentConfigProvider implements ConfigProviderInterface
      * @var string[]
      */
     protected $methodCodes = [
-        \WebPlanex\Fort\Model\Method\Cc::CODE,
-       
+        \Payfort\Fort\Model\Method\Cc::CODE,
+        \Payfort\Fort\Model\Method\Sadad::CODE,
+        \Payfort\Fort\Model\Method\Naps::CODE
     ];
 
     /**
@@ -55,16 +56,16 @@ class PaymentConfigProvider implements ConfigProviderInterface
     {
         $config = [
             'payment' => [
-                'webplanexFort' => [],
+                'payfortFort' => [],
             ],
         ];
         foreach ($this->methodCodes as $code) {
             if ($this->methods[$code]->isAvailable()) {
-                $config['payment']['webplanexFort'][$code]['redirectUrl'] = $this->getActionUrl($code);
-                $config['payment']['webplanexFort'][$code]['instructions'] = $this->methods[$code]->getInstructions();
-                if($code == \WebPlanex\Fort\Model\Method\Cc::CODE) {
-                    //$config['payment']['webplanexFort'][$code]['isMerchantPage'] = $this->methods[$code]->isMerchantPage();
-                    //$config['payment']['webplanexFort'][$code]['merchantPageUrl'] = $this->urlBuilder->getUrl('payfortfort/payment/merchantPage', ['_secure' => true]);
+                $config['payment']['payfortFort'][$code]['redirectUrl'] = $this->getActionUrl($code);
+                $config['payment']['payfortFort'][$code]['instructions'] = $this->methods[$code]->getInstructions();
+                if($code == \Payfort\Fort\Model\Method\Cc::CODE) {
+                    $config['payment']['payfortFort'][$code]['isMerchantPage'] = $this->methods[$code]->isMerchantPage();
+                    $config['payment']['payfortFort'][$code]['merchantPageUrl'] = $this->urlBuilder->getUrl('payfortfort/payment/merchantPage', ['_secure' => true]);
                 }
             }
         }

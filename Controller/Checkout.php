@@ -1,10 +1,12 @@
 <?php
-
-
-namespace WebPlanex\Fort\Controller;
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Payfort\Fort\Controller;
 
 /**
- * WebPlanex Checkout Controller
+ * Payfort Checkout Controller
  */
 abstract class Checkout extends \Magento\Framework\App\Action\Action
 {
@@ -29,7 +31,7 @@ abstract class Checkout extends \Magento\Framework\App\Action\Action
     protected $_logger;
 
     /**
-     * @var \WebPlanex\Fort\Helper\Data
+     * @var \Payfort\Fort\Helper\Data
      */
     protected $_helper;
 
@@ -40,9 +42,9 @@ abstract class Checkout extends \Magento\Framework\App\Action\Action
     
     /**
      *
-     * @var \WebPlanex\Fort\Model\Payment
+     * @var \Payfort\Fort\Model\Payment
      */
-    protected $_webplanexModel;
+    protected $_payfortModel;
     
     /**
      *
@@ -56,8 +58,8 @@ abstract class Checkout extends \Magento\Framework\App\Action\Action
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magento\Checkout\Model\Session $checkoutSession
      * @param \Magento\Sales\Model\OrderFactory $orderFactory
-     * @param \WebPlanex\Fort\Model\Payment $webplanexModel
-     * @param \WebPlanex\Fort\Helper\Checkout $checkoutHelper
+     * @param \Payfort\Fort\Model\Payment $payfortModel
+     * @param \Payfort\Fort\Helper\Checkout $checkoutHelper
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
@@ -66,8 +68,8 @@ abstract class Checkout extends \Magento\Framework\App\Action\Action
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Sales\Model\OrderFactory $orderFactory,
-        \WebPlanex\Fort\Model\Payment $webplanexModel,
-        \WebPlanex\Fort\Helper\Data $helper,
+        \Payfort\Fort\Model\Payment $payfortModel,
+        \Payfort\Fort\Helper\Data $helper,
         \Psr\Log\LoggerInterface $logger
     ) {
         $this->_pageFactory = $customerSession;
@@ -75,7 +77,7 @@ abstract class Checkout extends \Magento\Framework\App\Action\Action
         $this->_checkoutSession = $checkoutSession;
         $this->_orderFactory = $orderFactory;
         $this->_logger = $logger;
-        $this->_webplanexModel = $webplanexModel;
+        $this->_payfortModel = $payfortModel;
         $this->_helper = $helper;
         parent::__construct($context);
     }
@@ -152,9 +154,9 @@ abstract class Checkout extends \Magento\Framework\App\Action\Action
         return $this->_customerSession;
     }
 
-    protected function getWebPlanexModel()
+    protected function getPayfortModel()
     {
-        return $this->_webplanexModel;
+        return $this->_payfortModel;
     }
 
     protected function getHelper()

@@ -1,12 +1,12 @@
 <?php
 
-namespace WebPlanex\Fort\Block\Payment;
+namespace Payfort\Fort\Block\Payment;
 
 use Magento\Customer\Model\Context;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Model\Order;
-//use WebPlanex\Fort\Model\Payment;
-use WebPlanex\Fort\Helper\Data;
+//use Payfort\Fort\Model\Payment;
+use Payfort\Fort\Helper\Data;
 
 class Redirect extends \Magento\Framework\View\Element\Template
 {
@@ -27,9 +27,9 @@ class Redirect extends \Magento\Framework\View\Element\Template
 
     /**
      *
-     * @var \WebPlanex\Fort\Model\Payment
+     * @var \Payfort\Fort\Model\Payment
      */
-    protected $_webplanexModel;
+    protected $_payfortModel;
 
     /**
      * @var \Psr\Log\LoggerInterface
@@ -39,7 +39,7 @@ class Redirect extends \Magento\Framework\View\Element\Template
     /**
      * Helper
      *
-     * @var \WebPlanex\Fort\Helper\Data
+     * @var \Payfort\Fort\Helper\Data
      */
     protected $_helper;
     
@@ -62,9 +62,9 @@ class Redirect extends \Magento\Framework\View\Element\Template
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Sales\Model\Order\Config $orderConfig,
         \Magento\Framework\App\Http\Context $httpContext,
-        \WebPlanex\Fort\Model\Payment $webplanexModel,
+        \Payfort\Fort\Model\Payment $payfortModel,
         \Psr\Log\LoggerInterface $logger,
-        \WebPlanex\Fort\Helper\Data $helperFort,
+        \Payfort\Fort\Helper\Data $helperFort,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -75,7 +75,7 @@ class Redirect extends \Magento\Framework\View\Element\Template
 
         $this->_helper = $helperFort;
 
-        $this->_webplanexModel = $webplanexModel;
+        $this->_payfortModel = $payfortModel;
         $this->_logger = $logger;
     }
 
@@ -129,7 +129,7 @@ class Redirect extends \Magento\Framework\View\Element\Template
         
             $paymentMethod= $order->getPayment()->getMethod();
             
-            $order->addStatusHistoryComment( 'WebPlanexFort :: redirecting to payment page with Method: '.$paymentMethod );
+            $order->addStatusHistoryComment( 'PayfortFort :: redirecting to payment page with Method: '.$paymentMethod );
 
             $order->save();
         }

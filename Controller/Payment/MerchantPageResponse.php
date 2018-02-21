@@ -1,8 +1,8 @@
 <?php
 
-namespace WebPlanex\Fort\Controller\Payment;
+namespace Payfort\Fort\Controller\Payment;
 
-class MerchantPageResponse extends \WebPlanex\Fort\Controller\Checkout
+class MerchantPageResponse extends \Payfort\Fort\Controller\Checkout
 {
     public function execute()
     {
@@ -11,7 +11,7 @@ class MerchantPageResponse extends \WebPlanex\Fort\Controller\Checkout
         $returnUrl = $this->getHelper()->getUrl('checkout/onepage/success');
         $responseParams = $this->getRequest()->getParams();
         $paymentResponse = $this->getHelper()->validateResponse($responseParams);
-        $paymentModel = $this->getWebPlanexModel();
+        $paymentModel = $this->getPayfortModel();
         $success = true;
         if($paymentResponse == $paymentModel::PAYMENT_STATUS_SUCCESS) {
             $host2HostParams = $this->getHelper()->merchantPageNotifyFort($order, $responseParams);

@@ -1,8 +1,8 @@
 <?php
 
-namespace WebPlanex\Fort\Controller\Payment;
+namespace Payfort\Fort\Controller\Payment;
 
-class Response extends \WebPlanex\Fort\Controller\Checkout
+class Response extends \Payfort\Fort\Controller\Checkout
 {
     public function execute()
     {
@@ -12,7 +12,7 @@ class Response extends \WebPlanex\Fort\Controller\Checkout
         
         $responseParams = $this->getRequest()->getParams();
         $paymentResponse = $this->getHelper()->validateResponse($responseParams);
-        $paymentModel = $this->getWebPlanexModel();
+        $paymentModel = $this->getPayfortModel();
         if($paymentResponse == $paymentModel::PAYMENT_STATUS_SUCCESS) {
             $this->getHelper()->processOrder($order);
             $returnUrl = $this->getHelper()->getUrl('checkout/onepage/success');

@@ -1,12 +1,12 @@
 <?php
     // @codingStandardsIgnoreFile
 
-    /** @var \WebPlanex\Fort\Block\Payment\Redirect $block */
+    /** @var \Payfort\Fort\Block\Payment\Redirect $block */
 
     $form_data = $block->getFormData();
     $form_url = $block->getFormUrl();
 ?>
-<div class="webplanexfort-checkout">
+<div class="payfortfort-checkout">
     <?php
     if( !$block->getOrderOk() )
     {
@@ -30,13 +30,13 @@
                 <div class="pf-iframe" id="pf_iframe_content"></div>
             </div>
         </div>
-        <form name="webplanex_payment_form" id="webplanex_payment_form" method="post" action="<?php echo $form_url; ?>" style="display:none">
+        <form name="payfort_payment_form" id="payfort_payment_form" method="post" action="<?php echo $form_url; ?>" style="display:none">
             <!-- general parameters -->
             <?php foreach ($form_data as $k => $v): ?>
                 <input type="hidden" name="<?php echo $k ?>" value="<?php echo $v ?>">
             <?php endforeach; ?>
         </form>
-        <input type="hidden" id="webplanex_cancel_url" value="<?php echo $block->getUrl('payfortfort/payment/merchantPageCancel')?>"/>
+        <input type="hidden" id="payfort_cancel_url" value="<?php echo $block->getUrl('payfortfort/payment/merchantPageCancel')?>"/>
         <script type="text/javascript">
             require(['jquery', 'merchantPage'],function($){
                 'use strict';

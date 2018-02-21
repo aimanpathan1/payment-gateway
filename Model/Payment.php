@@ -1,13 +1,23 @@
 <?php
-namespace WebPlanex\Fort\Model;
+/**
+ * Payment Command Types Source Model
+ *
+ * @category    Payfort
+ * @package     Payfort_Fort
+ * @author      Deya Zalloum (dzalloum@payfort.com)
+ * @copyright   Payfort (http://www.payfort.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
 
+namespace Payfort\Fort\Model;
+//use Magento\Framework\Pricing\PriceCurrencyInterface;
 
 class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 {
-    const CODE = 'webplanex_fort';
+    const CODE = 'payfort_fort';
     
-    const STATUS_NEW    = 'webplanex_fort_new';
-    const STATUS_FAILED = 'webplanex_fort_failed';
+    const STATUS_NEW    = 'payfort_fort_new';
+    const STATUS_FAILED = 'payfort_fort_failed';
     
     const PAYMENT_STATUS_SUCCESS   = 1;
     const PAYMENT_STATUS_FAILED    = 0;
@@ -37,7 +47,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
     
     /**
      *
-     * @var \WebPlanex\Fort\Helper\Data 
+     * @var \Payfort\Fort\Helper\Data 
      */
     protected $_helper;
     
@@ -51,7 +61,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Api\ExtensionAttributesFactory $extensionFactory,
         \Magento\Framework\Api\AttributeValueFactory $customAttributeFactory,
-        \WebPlanex\Fort\Helper\Data $helper,
+        \Payfort\Fort\Helper\Data $helper,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Payment\Model\Method\Logger $logger,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
@@ -116,7 +126,7 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
     public function getInstructions()
     {
         //return trim($this->getConfigData('instructions'));
-        return __('You will be redirected to the PayFort website when you place an order');
+        return __('You will be redirected to the PayFort website when you place an order.');
     }
     
     /**

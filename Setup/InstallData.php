@@ -6,7 +6,7 @@ use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\TestFramework\Event\Magento;
-use WebPlanex\Fort\Model\Payment as PayfortPayment;
+use Payfort\Fort\Model\Payment as PayfortPayment;
 
 /**
  * @codeCoverageIgnore

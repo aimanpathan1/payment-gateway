@@ -1,5 +1,5 @@
 <?php
-namespace WebPlanex\Fort\Observer;
+namespace Payfort\Fort\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 
@@ -58,14 +58,14 @@ class AdminSystemConfigChangedPaymentObserver implements ObserverInterface
         $scope = $this->_appConfig->getScope();
         $scopeId = $this->_appConfig->getScopeId();
         foreach($commonConfigKeys as $configKey) {
-            $configVal = $this->_appConfig->getConfigDataValue('payment/webplanex_fort/'. $configKey);
+            $configVal = $this->_appConfig->getConfigDataValue('payment/payfort_fort/'. $configKey);
             $this->savaCommonConfig($configKey, $configVal, $scope, $scopeId);
         }
     }
     
     protected function savaCommonConfig($configKey, $configValue, $scope, $scopeId) {
-        $this->_resourceConfig->saveConfig('payment/webplanex_fort_cc/'.$configKey, $configValue, $scope, $scopeId);
-        $this->_resourceConfig->saveConfig('payment/webplanex_fort_naps/'.$configKey, $configValue, $scope, $scopeId);
-        $this->_resourceConfig->saveConfig('payment/webplanex_fort_sadad/'.$configKey, $configValue, $scope, $scopeId);
+        $this->_resourceConfig->saveConfig('payment/payfort_fort_cc/'.$configKey, $configValue, $scope, $scopeId);
+        $this->_resourceConfig->saveConfig('payment/payfort_fort_naps/'.$configKey, $configValue, $scope, $scopeId);
+        $this->_resourceConfig->saveConfig('payment/payfort_fort_sadad/'.$configKey, $configValue, $scope, $scopeId);
     }
 }
